@@ -1,5 +1,7 @@
 window.addEventListener('DOMContentLoaded', init);
 
+let ifClicked = false;
+
 function init(){
     const buttons = document.getElementsByTagName("button");
     
@@ -41,12 +43,20 @@ function calculateEvent(){
 
 }
 
+
 function logEvent(){
-    console.log('log event test');
+    try {
+        let x = table.secondColumn;
+        console.log('executes if no error');
+    } catch(error){
+        console.log('table button does not have a secondColumn property');
+    } finally {
+        console.log('executes regardless ')
+    }
 }
 
 function errorEvent(){
-    console.error('error has occured');
+    throw new MyError('Error has been thrown');
 }
 
 function countEvent(){
@@ -58,8 +68,8 @@ function warnEvent(){
 }
 
 function assertEvent(){
-    let str = 'an assertion';
-    console.assert(10 == (20 / 2), str);
+    console.assert(ifClicked == false, 'button has been clicked before');
+    ifClicked = true;
 }
 
 function clearEvent(){
@@ -67,11 +77,13 @@ function clearEvent(){
 }
 
 function dirEvent(){
-    console.dir(dir);
+    var test1 = {field1: "one", field2: "two"};
+    console.dir(test1);
 }
 
 function dirxmlEvent(){
-    console.dirxml(dirxmlO);
+    var test1 = {field1: "one", field2: "two"};
+    console.dirxml(test1);
 }
 
 function groupStartEvent(){
@@ -95,9 +107,16 @@ function endTimerEvent(){
 }
 
 function traceEvent(){
-
+    console.trace();
 }
 
 function globalErrorEvent(){
-
+    TrackJS.track('Testing TrackJS!');
 }
+
+class MyError extends Error {
+    constructor(message) {
+      super(message); 
+      this.name = "MyError";
+    }
+  }
