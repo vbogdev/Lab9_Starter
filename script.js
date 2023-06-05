@@ -111,7 +111,7 @@ function traceEvent(){
 }
 
 function globalErrorEvent(){
-    TrackJS.track('Testing TrackJS!');
+    TrackJS.track('An error has been sent to track JS');
 }
 
 class MyError extends Error {
